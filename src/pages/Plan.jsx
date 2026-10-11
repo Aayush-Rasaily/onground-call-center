@@ -6,9 +6,7 @@ import {
   IconPhoneIncoming,
   IconHistory,
   IconArrowUpRight,
-  IconFlame,
   IconClock,
-  IconCheck,
 } from "@tabler/icons-react";
 
 import {
@@ -18,269 +16,274 @@ import {
 } from "../data/mockData";
 
 import LeadModal from "../components/leads/LeadModal";
+import CallPanel from "../components/calls/CallPanel";
 
 function Plan() {
   const [tab, setTab] = useState("outgoing");
   const [expanded, setExpanded] = useState(null);
   const [leadIndex, setLeadIndex] = useState(null);
-  const [calling, setCalling] = useState(null);
+  const [activeCall, setActiveCall] = useState(null);
 
-  const callBack = (name) => {
-    setCalling(name);
-
-    setTimeout(() => {
-      setCalling(null);
-    }, 1800);
+  const startHumanCall = (call) => {
+    setActiveCall({
+      name: call.name,
+      phone: call.phone,
+      mode: "human",
+    });
   };
 
   return (
     <>
+      {/* PAGE HEADER */}
       <div className="page-heading">
         <div>
           <div className="eyebrow">CALL PLANNING</div>
           <h1>Plan</h1>
           <p>Prioritise the calls that matter most.</p>
         </div>
+
+        <div className="plan-summary">
+          <div>
+            <strong>{leads.length}</strong>
+            <span>Calls planned</span>
+          </div>
+
+          <div>
+            <strong>{incomingCalls.length}</strong>
+            <span>Incoming</span>
+          </div>
+        </div>
       </div>
 
       {/* TABS */}
-      <div className="plan-tabs">
+      <div className="tabs">
         <button
-          className={tab === "outgoing" ? "plan-tab active" : "plan-tab"}
-          onClick={() => {
-            setTab("outgoing");
-            setExpanded(null);
-          }}
+          className={tab === "outgoing" ? "tab active" : "tab"}
+          onClick={() => setTab("outgoing")}
         >
           <IconPhone size={17} />
-          <span>Calls to make</span>
-          <b>{leads.length}</b>
+          Calls to make
+          <span className="tab-count">{leads.length}</span>
         </button>
 
         <button
-          className={tab === "incoming" ? "plan-tab active" : "plan-tab"}
-          onClick={() => {
-            setTab("incoming");
-            setExpanded(null);
-          }}
+          className={tab === "incoming" ? "tab active" : "tab"}
+          onClick={() => setTab("incoming")}
         >
           <IconPhoneIncoming size={17} />
-          <span>Incoming</span>
-          <b className="incoming-count">{incomingCalls.length}</b>
+          Incoming
+          <span className="tab-count">{incomingCalls.length}</span>
         </button>
 
         <button
-          className={tab === "recent" ? "plan-tab active" : "plan-tab"}
-          onClick={() => {
-            setTab("recent");
-            setExpanded(null);
-          }}
+          className={tab === "recent" ? "tab active" : "tab"}
+          onClick={() => setTab("recent")}
         >
           <IconHistory size={17} />
-          <span>Recent</span>
+          Recent
         </button>
       </div>
 
+      {/* MAIN PANEL */}
       <section className="panel plan-panel">
 
-        {/* CALLS TO MAKE */}
+        {/* =========================
+            CALLS TO MAKE
+        ========================== */}
         {tab === "outgoing" && (
           <>
-            <div className="plan-list-header">
+            <div className="list-heading">
               <div>
                 <h2>Calls to make</h2>
-                <p>Leads ranked by attractiveness score.</p>
+                <p>
+                  Start with the leads showing the strongest buying signals.
+                </p>
               </div>
 
-              <div className="plan-header-stat">
-                <strong>{leads.length}</strong>
-                <span>priority leads</span>
-              </div>
+              <span className="muted-count">
+                {leads.length} leads
+              </span>
             </div>
 
-            <div className="lead-list">
-              {leads.map((lead, index) => {
-                const isExpanded = expanded === index;
+            <div className="call-list">
+              {leads.map((lead, index) => (
+                <div className="call-item" key={lead.id}>
 
-                return (
                   <div
-                    className={`lead-row ${isExpanded ? "expanded" : ""}`}
-                    key={lead.id}
+                    className="call-main"
+                    onClick={() =>
+                      setExpanded(
+                        expanded === index ? null : index
+                      )
+                    }
                   >
-                    <div
-                      className="lead-row-main"
-                      onClick={() =>
-                        setExpanded(isExpanded ? null : index)
-                      }
-                    >
-                      <div className="lead-avatar">
-                        {lead.initials}
-                      </div>
-
-                      <div className="lead-main-info">
-                        <div className="lead-name-line">
-                          <strong>{lead.name}</strong>
-
-                          {lead.score >= 90 && (
-                            <span className="hot-badge">
-                              <IconFlame size={12} />
-                              HOT
-                            </span>
-                          )}
-                        </div>
-
-                        <span className="lead-interest">
-                          {lead.interest}
-                        </span>
-                      </div>
-
-                      <div className="lead-score">
-                        <strong>{lead.score}</strong>
-                        <span>score</span>
-                      </div>
-
-                      <IconChevronDown
-                        size={19}
-                        className={`lead-chevron ${
-                          isExpanded ? "open" : ""
-                        }`}
-                      />
+                    <div className="small-avatar">
+                      {lead.initials}
                     </div>
 
-                    {isExpanded && (
-                      <div className="lead-expanded">
-                        <div className="lead-metrics">
-                          <div className="lead-metric">
-                            <span>ICP SCORE</span>
-                            <strong>{lead.icp}</strong>
-                          </div>
+                    <div className="call-person">
+                      <strong>{lead.name}</strong>
+                      <span>{lead.interest}</span>
+                    </div>
 
-                          <div className="lead-metric">
-                            <span>INTENT</span>
-                            <strong>{lead.intent}</strong>
-                          </div>
+                    <div className="score-block">
+                      <strong>{lead.score}</strong>
+                      <span>score</span>
+                    </div>
 
-                          <div className="lead-metric">
-                            <span>STATUS</span>
-                            <strong className="metric-green">
-                              Ready to call
-                            </strong>
-                          </div>
-                        </div>
+                    <IconChevronDown
+                      size={18}
+                      className={
+                        expanded === index ? "rotate" : ""
+                      }
+                    />
+                  </div>
 
-                        <div className="buying-signals">
-                          <span>BUYING SIGNALS</span>
+                  {expanded === index && (
+                    <div className="expanded-call">
 
-                          <div className="signal-list">
-                            {lead.signals.slice(0, 3).map((signal) => (
-                              <span key={signal}>
-                                <IconCheck size={13} />
-                                {signal}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="lead-actions">
-                          <button
-                            className="secondary-action"
-                            onClick={() => setLeadIndex(index)}
-                          >
-                            View lead
-                            <IconChevronRight size={15} />
-                          </button>
-
-                          <button
-                            className="primary-action"
-                            onClick={() => callBack(lead.name)}
-                          >
-                            <IconPhone size={15} />
-                            Call now
-                          </button>
-                        </div>
+                      <div className="detail-column">
+                        <span>ICP</span>
+                        <strong>{lead.icp}</strong>
                       </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </>
-        )}
 
-        {/* INCOMING */}
-        {tab === "incoming" && (
-          <>
-            <div className="plan-list-header">
-              <div>
-                <h2>Incoming calls</h2>
-                <p>Missed calls ranked by value at stake.</p>
-              </div>
+                      <div className="detail-column">
+                        <span>Intent</span>
+                        <strong>{lead.intent}</strong>
+                      </div>
 
-              <div className="waiting-badge">
-                {incomingCalls.length} waiting
-              </div>
-            </div>
+                      <div className="detail-story">
+                        <span>Buying signals</span>
+                        <p>
+                          {lead.signals?.slice(0, 2).join(" · ") ||
+                            "Strong engagement and recent interest"}
+                        </p>
+                      </div>
 
-            <div className="incoming-list">
-              {incomingCalls.map((call) => (
-                <div className="incoming-card" key={call.name}>
-                  <div className="lead-avatar">
-                    {call.initials}
-                  </div>
+                      <div className="expanded-actions">
+                        <button
+                          className="small-primary"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            setLeadIndex(index);
+                          }}
+                        >
+                          View lead
+                          <IconChevronRight size={15} />
+                        </button>
 
-                  <div className="incoming-info">
-                    <strong>{call.name}</strong>
-                    <span>{call.reason}</span>
-                  </div>
+                        <button
+                          className="small-call-btn"
+                          onClick={(event) => {
+                            event.stopPropagation();
 
-                  <div className="incoming-value">
-                    <span>VALUE AT STAKE</span>
-                    <strong>{call.value}</strong>
-                  </div>
+                            startHumanCall({
+                              name: lead.name,
+                              phone:
+                                lead.phone ||
+                                "+919876543210",
+                            });
+                          }}
+                        >
+                          <IconPhone size={15} />
+                          Call lead
+                        </button>
+                      </div>
 
-                  <div className="incoming-time">
-                    <IconClock size={15} />
-                    {call.time}
-                  </div>
-
-                  <button
-                    className={`primary-action ${
-                      calling === call.name ? "calling" : ""
-                    }`}
-                    onClick={() => callBack(call.name)}
-                  >
-                    <IconPhone size={15} />
-
-                    {calling === call.name
-                      ? "Calling..."
-                      : "Call back"}
-                  </button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
           </>
         )}
 
-        {/* RECENT */}
-        {tab === "recent" && (
+        {/* =========================
+            INCOMING
+        ========================== */}
+        {tab === "incoming" && (
           <>
-            <div className="plan-list-header">
+            <div className="list-heading">
               <div>
-                <h2>Recent calls</h2>
-                <p>Review your latest conversations.</p>
+                <h2>Incoming</h2>
+                <p>
+                  Missed calls ranked by value at stake.
+                </p>
               </div>
+
+              <span className="green-pill">
+                {incomingCalls.length} waiting
+              </span>
             </div>
 
-            <div className="recent-list">
+            <div className="call-list">
+
+              {incomingCalls.map((call) => (
+                <div
+                  className="incoming-row"
+                  key={`${call.name}-${call.time}`}
+                >
+
+                  <div className="small-avatar">
+                    {call.initials}
+                  </div>
+
+                  <div className="call-person">
+                    <strong>{call.name}</strong>
+                    <span>{call.reason}</span>
+                  </div>
+
+                  <div className="value-at-stake">
+                    <strong>{call.value}</strong>
+
+                    <span>
+                      <IconClock size={13} />
+                      {call.time}
+                    </span>
+                  </div>
+
+                  <button
+                    className="callback-btn"
+                    onClick={() => startHumanCall(call)}
+                  >
+                    <IconPhone size={16} />
+                    Call back
+                  </button>
+
+                </div>
+              ))}
+
+            </div>
+          </>
+        )}
+
+        {/* =========================
+            RECENT
+        ========================== */}
+        {tab === "recent" && (
+          <>
+            <div className="list-heading">
+              <div>
+                <h2>Recent calls</h2>
+                <p>
+                  Review your latest conversations.
+                </p>
+              </div>
+
+              <span className="muted-count">
+                {recentCalls.length} calls
+              </span>
+            </div>
+
+            <div className="call-list">
+
               {recentCalls.map((call) => (
                 <div
-                  className="recent-card"
+                  className="recent-row"
                   key={`${call.name}-${call.time}`}
-                  onClick={() =>
-                    alert(`Opening call review for ${call.name}`)
-                  }
                 >
-                  <div className="lead-avatar">
+
+                  <div className="small-avatar">
                     {call.name
                       .split(" ")
                       .map((x) => x[0])
@@ -288,8 +291,9 @@ function Plan() {
                       .slice(0, 2)}
                   </div>
 
-                  <div className="recent-info">
+                  <div className="call-person">
                     <strong>{call.name}</strong>
+
                     <span>
                       {call.type} · {call.time}
                     </span>
@@ -300,36 +304,40 @@ function Plan() {
                   </span>
 
                   <span
-                    className={`result ${
-                      call.result
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")
-                    }`}
+                    className={`result ${call.result
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
                   >
                     {call.result}
                   </span>
 
-                  <IconArrowUpRight size={18} />
+                  <IconArrowUpRight size={17} />
+
                 </div>
               ))}
+
             </div>
           </>
         )}
       </section>
 
-      {calling && (
-        <div className="call-toast">
-          <IconPhone size={17} />
-          Calling <strong>{calling}</strong>...
-        </div>
-      )}
-
+      {/* LEAD MODAL */}
       {leadIndex !== null && (
         <LeadModal
           leads={leads}
           index={leadIndex}
           setIndex={setLeadIndex}
           onClose={() => setLeadIndex(null)}
+        />
+      )}
+
+      {/* REAL HUMAN CALL PANEL */}
+      {activeCall && (
+        <CallPanel
+          name={activeCall.name}
+          phone={activeCall.phone}
+          mode={activeCall.mode}
+          onClose={() => setActiveCall(null)}
         />
       )}
     </>

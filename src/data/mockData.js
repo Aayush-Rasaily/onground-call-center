@@ -1,204 +1,309 @@
+// ==========================================
+// ON-GROUND CALL CENTRE - MOCK DATA
+// ==========================================
+
+// ------------------------------------------
+// LEADS
+// ------------------------------------------
+
 export const leads = [{
         id: 1,
-        name: "Mukunda",
-        initials: "MK",
-        interest: "Smart Ortho GRID Mattress",
-        score: 94,
-        icp: 91,
-        intent: 96,
-        company: "Retail customer",
-        phone: "+91 98765 43210",
-        status: "Hot",
-        signals: [
-            "Quotation demanded",
-            "Price-sensitive and comparing competitors",
-            "Asked about EMI options",
-            "Interested in warranty and trial",
-        ],
-    },
-    {
-        id: 2,
-        name: "Kavitha R.",
-        initials: "KR",
-        interest: "SmartGRID Hybrid Mattress",
-        score: 88,
-        icp: 86,
-        intent: 90,
-        company: "Retail customer",
-        phone: "+91 97654 32109",
-        status: "Hot",
-        signals: [
-            "Already interested in Hybrid",
-            "Needs financing confidence",
-            "Previous call completed",
-            "10-year warranty discussed",
-        ],
-    },
-    {
-        id: 3,
         name: "Priya Iyer",
         initials: "PI",
-        interest: "Billing dispute",
-        score: 79,
-        icp: 81,
-        intent: 76,
-        company: "Existing customer",
-        phone: "+91 99887 66554",
-        status: "Warm",
+        interest: "Premium plan upgrade",
+        score: 94,
+        icp: 96,
+        intent: 92,
+        phone: "+919876543210",
         signals: [
-            "Callback requested",
-            "Billing issue unresolved",
-            "Likely needs manager assistance",
+            "Visited premium plan page twice",
+            "Requested pricing information",
+            "Engaged with follow-up message",
         ],
     },
+
+    {
+        id: 2,
+        name: "Rohan Mehta",
+        initials: "RM",
+        interest: "New product enquiry",
+        score: 89,
+        icp: 91,
+        intent: 87,
+        phone: "+919876543211",
+        signals: [
+            "High-value product viewed",
+            "Requested a callback",
+            "Compared two product options",
+        ],
+    },
+
+    {
+        id: 3,
+        name: "Ananya Shah",
+        initials: "AS",
+        interest: "Enterprise package",
+        score: 86,
+        icp: 88,
+        intent: 84,
+        phone: "+919876543212",
+        signals: [
+            "Downloaded product brochure",
+            "Asked about enterprise pricing",
+            "Returned to product page",
+        ],
+    },
+
     {
         id: 4,
-        name: "Suresh Nair",
-        initials: "SN",
-        interest: "Plan upgrade enquiry",
-        score: 72,
-        icp: 75,
-        intent: 69,
-        company: "Existing customer",
-        phone: "+91 91234 56789",
-        status: "Warm",
+        name: "Vikram Rao",
+        initials: "VR",
+        interest: "Product follow-up",
+        score: 82,
+        icp: 85,
+        intent: 80,
+        phone: "+919876543213",
         signals: [
-            "Asked about plan upgrade",
-            "Interested in premium features",
+            "Requested product information",
+            "Opened follow-up message",
+            "Previously engaged with sales team",
         ],
     },
+
     {
         id: 5,
-        name: "Meera S.",
-        initials: "MS",
-        interest: "Ortho Grid",
-        score: 64,
-        icp: 68,
-        intent: 61,
-        company: "Retail customer",
-        phone: "+91 90123 45678",
-        status: "Ageing",
+        name: "Suresh Nair",
+        initials: "SN",
+        interest: "Plan upgrade",
+        score: 78,
+        icp: 81,
+        intent: 76,
+        phone: "+919876543214",
         signals: [
-            "No contact in 3 days",
-            "Quote already shared",
-            "Follow-up required",
+            "Asked about upgrade options",
+            "Existing customer",
+            "Positive previous interaction",
         ],
     },
 ];
 
+
+// ------------------------------------------
+// INCOMING CALLS
+// ------------------------------------------
+
 export const incomingCalls = [{
-        name: "Karan P.",
-        initials: "KP",
-        reason: "Callback requested",
-        value: "₹42,000",
-        time: "2 min ago",
+        name: "Priya Iyer",
+        initials: "PI",
+        reason: "Likely billing dispute",
+        value: "₹48,000",
+        time: "4:30 PM",
+        phone: "+919876543210",
     },
+
     {
-        name: "Divya R.",
-        initials: "DR",
-        reason: "Quotation follow-up",
-        value: "₹28,500",
-        time: "8 min ago",
-    },
-    {
-        name: "Amit Shah",
-        initials: "AS",
+        name: "Rohan Mehta",
+        initials: "RM",
         reason: "Product enquiry",
-        value: "₹18,000",
-        time: "14 min ago",
+        value: "₹35,000",
+        time: "4:45 PM",
+        phone: "+919876543211",
     },
+
     {
-        name: "Sneha M.",
-        initials: "SM",
-        reason: "EMI enquiry",
-        value: "₹31,000",
-        time: "21 min ago",
+        name: "Ananya Shah",
+        initials: "AS",
+        reason: "Callback requested",
+        value: "₹28,000",
+        time: "5:10 PM",
+        phone: "+919876543212",
+    },
+
+    {
+        name: "Vikram Rao",
+        initials: "VR",
+        reason: "Order follow-up",
+        value: "₹21,000",
+        time: "5:30 PM",
+        phone: "+919876543213",
     },
 ];
+
+
+// ------------------------------------------
+// RECENT CALLS
+// ------------------------------------------
 
 export const recentCalls = [{
-        name: "Rahul Menon",
-        type: "Outbound",
-        time: "Today, 2:10 PM",
-        duration: "4m 12s",
-        result: "Callback",
-    },
-    {
-        name: "Anita Rao",
-        type: "Incoming",
-        time: "Today, 1:42 PM",
-        duration: "6m 04s",
+        name: "Suresh Nair",
+        type: "Outgoing",
+        time: "Today · 11:42 AM",
+        duration: "5m 18s",
         result: "Converted",
     },
+
     {
-        name: "Suresh Nair",
-        type: "Outbound",
-        time: "Today, 12:55 PM",
-        duration: "3m 48s",
+        name: "Meera Kapoor",
+        type: "Incoming",
+        time: "Today · 10:35 AM",
+        duration: "3m 42s",
         result: "Follow-up",
     },
+
     {
-        name: "Meera S.",
-        type: "Outbound",
-        time: "Today, 11:35 AM",
-        duration: "2m 31s",
-        result: "No answer",
+        name: "Arjun Menon",
+        type: "Outgoing",
+        time: "Today · 9:50 AM",
+        duration: "4m 12s",
+        result: "Interested",
+    },
+
+    {
+        name: "Neha Sharma",
+        type: "Incoming",
+        time: "Yesterday · 6:20 PM",
+        duration: "6m 04s",
+        result: "Resolved",
+    },
+
+    {
+        name: "Karan Shah",
+        type: "Outgoing",
+        time: "Yesterday · 5:45 PM",
+        duration: "2m 51s",
+        result: "Follow-up",
     },
 ];
 
-export const performanceData = [
-    { day: "Mon", calls: 18 },
-    { day: "Tue", calls: 24 },
-    { day: "Wed", calls: 21 },
-    { day: "Thu", calls: 29 },
-    { day: "Fri", calls: 26 },
-    { day: "Sat", calls: 31 },
-    { day: "Sun", calls: 34 },
+
+// ------------------------------------------
+// DASHBOARD CHART DATA
+// ------------------------------------------
+
+export const performanceData = [{
+        day: "Mon",
+        calls: 21,
+    },
+
+    {
+        day: "Tue",
+        calls: 28,
+    },
+
+    {
+        day: "Wed",
+        calls: 24,
+    },
+
+    {
+        day: "Thu",
+        calls: 31,
+    },
+
+    {
+        day: "Fri",
+        calls: 29,
+    },
+
+    {
+        day: "Sat",
+        calls: 27,
+    },
+
+    {
+        day: "Sun",
+        calls: 23,
+    },
 ];
+
+
+// ------------------------------------------
+// PULSE CHANNELS
+// ------------------------------------------
 
 export const pulseChannels = [{
-        name: "Call Centre Team",
-        icon: "#",
-        unread: 2,
+        name: "callcentre-team",
+        unread: 3,
     },
+
     {
-        name: "All Stores",
-        icon: "#",
-        unread: 0,
-    },
-    {
-        name: "Avani AI Coaching",
-        icon: "#",
+        name: "all-stores",
         unread: 1,
     },
+
+    {
+        name: "avani-coaching",
+        unread: 2,
+    },
 ];
+
+
+// ------------------------------------------
+// PULSE MESSAGES
+// ------------------------------------------
 
 export const pulseMessages = [{
         user: "Sunita Rao",
         initials: "SR",
-        text: "Greeting-in-first-10s QA score is at 71% this week, below our 85% target.",
-        time: "2:05 PM",
+        text: "Priya Iyer needs a callback before 4:30 PM regarding her billing concern.",
+        time: "3:42 PM",
         own: false,
     },
+
     {
-        user: "Sunita Rao",
-        initials: "SR",
-        text: "Let's push that up — open every call with the greeting script. I'll check back Friday.",
-        time: "2:05 PM",
+        user: "Avani",
+        initials: "AI",
+        text: "Suggested resolution: confirm the disputed charge and offer a priority review.",
+        time: "3:45 PM",
         own: false,
     },
+
     {
         user: "You",
-        initials: "AR",
-        text: "On it! Will make sure I open every call with the greeting script 🙌",
-        time: "2:10 PM",
-        own: true,
-    },
-    {
-        user: "Sunita Rao",
-        initials: "SR",
-        text: "Great attitude Aayush 🌟",
-        time: "2:14 PM",
+        initials: "AY",
+        text: "I'll take this one and confirm the callback.",
+        time: "3:48 PM",
         own: false,
+    },
+];
+
+
+// ------------------------------------------
+// CALENDAR EVENTS
+// ------------------------------------------
+
+export const calendarEvents = [{
+        date: "2026-10-11",
+        title: "Priya callback",
+        time: "4:30 PM",
+        type: "callback",
+    },
+
+    {
+        date: "2026-10-12",
+        title: "Team coaching",
+        time: "10:00 AM",
+        type: "coaching",
+    },
+
+    {
+        date: "2026-10-14",
+        title: "Lead review",
+        time: "2:00 PM",
+        type: "review",
+    },
+
+    {
+        date: "2026-10-16",
+        title: "Performance review",
+        time: "4:00 PM",
+        type: "review",
+    },
+
+    {
+        date: "2026-10-20",
+        title: "Store coordination",
+        time: "11:30 AM",
+        type: "meeting",
     },
 ];
