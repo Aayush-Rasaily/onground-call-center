@@ -36,3 +36,27 @@ A React frontend implementation of the On-Ground Call Centre staff application b
 ```bash
 npm install
 npm run dev
+
+## AI Tools Used
+
+- ChatGPT — used for UI/component planning, implementation assistance,
+  debugging, and code review.
+
+## Implementation Status
+
+### Completed
+- Dashboard
+- Plan: Calls to make, Incoming, Recent
+- Calendar
+- Pulse home
+- Pulse channel/chat
+- Leads modal with lead navigation
+- Responsive application shell
+- Local mock data
+- Interactive call-back actions
+- Channel messaging
+- Needs Your Input task interaction
+
+### Not Implemented
+- Backend/API integration
+- Real phone/call functionality
