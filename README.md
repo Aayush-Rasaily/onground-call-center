@@ -31,12 +31,6 @@ A React frontend implementation of the On-Ground Call Centre staff application b
 - AvaniBot actions
 - Responsive layout
 
-## Running Locally
-
-```bash
-npm install
-npm run dev
-
 ## AI Tools Used
 
 - ChatGPT — used for UI/component planning, implementation assistance,
@@ -60,3 +54,10 @@ npm run dev
 ### Not Implemented
 - Backend/API integration
 - Real phone/call functionality
+
+## Running Locally
+
+```bash
+npm install
+npm run dev
+
